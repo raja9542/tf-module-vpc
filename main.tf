@@ -19,6 +19,6 @@ resource "aws_subnet" "main" {
 
 resource "aws_vpc_peering_connection" "peer" {
   peer_owner_id = data.aws_caller_identity.current.account_id  # rather hardcoding we can get from datasources...data.tf (aws_caller_identity datasource)
-  peer_vpc_id   = vpc-0e9be6cf7a7cbd838 # default vpc id or workstation vpc id
+  peer_vpc_id   = "vpc-0e9be6cf7a7cbd838" # default vpc id or workstation vpc id
   vpc_id        = aws_vpc.main.id  # created vpc id
 }
