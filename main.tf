@@ -59,7 +59,7 @@ resource "aws_route_table" "public" {
   }
 # peering connection route
   route {
-    cidr_block = data.aws_vpc.default.cidr_block # workstation vpc cidr block
+    cidr_block = data.aws_vpc.default.cidr_block # workstation vpc cidr block ex:172.31.0.0/16
     vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
   }
 
@@ -101,7 +101,7 @@ resource "aws_route_table" "private" {
   }
   # peering connection route
   route {
-    cidr_block = data.aws_vpc.default.cidr_block # workstation vpc cidr block
+    cidr_block = data.aws_vpc.default.cidr_block # workstation vpc cidr block ex:172.31.0.0/16
     vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
   }
 
@@ -116,10 +116,10 @@ resource "aws_route_table_association" "private-rt-assoc" {
   subnet_id      = aws_subnet.private.*.id[count.index]
   route_table_id = aws_route_table.private.id
 }
-
-resource "aws_route" "r" {
+ # route vpc subnet into workstation vpc route table
+resource "aws_route" "default-vpc" {
   route_table_id            = data.aws_vpc.default.main_route_table_id  #workstation default route table id
-  destination_cidr_block    = var.cidr_block
+  destination_cidr_block    = var.cidr_block # 10.0.0.0/16
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 
 }
