@@ -117,6 +117,13 @@ resource "aws_route_table_association" "private-rt-assoc" {
   route_table_id = aws_route_table.private.id
 }
 
+resource "aws_route" "r" {
+  route_table_id            = data.aws_vpc.default.main_route_table_id  #workstation default route table id
+  destination_cidr_block    = var.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+
+}
+
 
 // create EC2
 
