@@ -38,6 +38,14 @@ resource "aws_route" "default" {
 
 }
 
+resource "aws_route" "igw" {
+  route_table_id            = aws_vpc.main.default_route_table_id  # created vpc route table id
+  destination_cidr_block    = "0.0.0.0/0" # default vpc ipv4 cidr (go to your vpcs there we can find it)
+  gateway_id                =  aws_internet_gateway.igw.id
+
+}
+
+
 resource "aws_route" "default_vpc" {
   route_table_id            = data.aws_vpc.default.main_route_table_id # id of default route table associated -workstation vpc
   destination_cidr_block    = var.cidr_block # our cidr block [10.0.0.0/16]
