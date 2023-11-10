@@ -54,4 +54,3 @@ resource "aws_route" "default-vpc" {
 }
 
 
-}
