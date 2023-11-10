@@ -32,17 +32,16 @@ resource "aws_eip" "ngw-eip" {
    domain   = "vpc"
 }
 
-#resource "aws_nat_gateway" "ngw" {
-#  allocation_id = aws_eip.ngw-eip.id
-#  subnet_id     = aws_subnet.public.*.id[0]
-#
-#  tags = merge(
-#    local.common_tags,
-#    {Name = "${var.env}-ngw"}
-#  )
-#
-##  depends_on = [aws_internet_gateway.igw]
-#}
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.ngw-eip.id
+  subnet_id     = var.public_subnet_ids[0]
+
+  tags = merge(
+    local.common_tags,
+    {Name = "${var.env}-ngw"}
+  )
+
+}
 
 
  # route vpc subnet into workstation vpc route table
