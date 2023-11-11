@@ -10,10 +10,9 @@ output "public_subnet_ids" {
   value = module.public_subnets
 }
 
-output "one_subnet_id" {
-  value = lookup(lookup(module.public_subnets, "public", null), "subnet_ids", null)[0]
-  //value = module.public_subnets["public"]["subnet_ids"][0]
-}
+#output "one_subnet_id" {
+#  value = lookup(lookup(module.public_subnets, "public", null), "subnet_ids", null)[0]
+#}
 
 #out = {
 #  "main" = { -----this is from root module
