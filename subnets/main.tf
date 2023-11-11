@@ -30,10 +30,10 @@ resource "aws_route_table_association" "association" {
   route_table_id = aws_route_table.route_table.id
 }
 
-resource "aws_route" "internet_gw_route" {
-  // internet_gw should be attached to only public subnet we created condition using internet_gw variable .
-  count                       = var.internet_gw ? 1 : 0
-  route_table_id              = aws_route_table.route_table.id
-  destination_cidr_block      = "0.0.0.0/0"
-  gateway_id                  = var.gateway_id
-}
+#resource "aws_route" "internet_gw_route" {
+#  // internet_gw should be attached to only public subnet we created condition using internet_gw variable .
+#  count                       = var.internet_gw ? 1 : 0
+#  route_table_id              = aws_route_table.route_table.id
+#  destination_cidr_block      = "0.0.0.0/0"
+#  gateway_id                  = var.gateway_id
+#}
