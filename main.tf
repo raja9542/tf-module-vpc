@@ -18,33 +18,7 @@ resource "aws_vpc_peering_connection" "peer" {
   )
 }
 
-
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
-
-  tags = merge(
-    local.common_tags,
-    {Name = "${var.env}-igw"}
-  )
-}
-
-resource "aws_eip" "ngw-eip" {
-   domain   = "vpc"
-}
-
-resource "aws_nat_gateway" "ngw" {
-  allocation_id = aws_eip.ngw-eip.id
-  subnet_id     = var.public_subnet_ids[0]
-
-  tags = merge(
-    local.common_tags,
-    {Name = "${var.env}-ngw"}
-  )
-
-}
-
-
- # route vpc subnet into workstation vpc route table
+# route vpc subnet into workstation vpc route table
 resource "aws_route" "default-vpc" {
   route_table_id            = data.aws_vpc.default.main_route_table_id  #workstation default route table id
   destination_cidr_block    = var.cidr_block # 10.0.0.0/16
