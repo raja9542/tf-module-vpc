@@ -13,11 +13,39 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
   value = module.private_subnets
 }
+// 1.output "private_subnet_ids" {
+//  value = module.private_subnets
+//}
+#"main" = {
+#  "private_subnet_ids" = {
+#    "app" = {
+#      "subnet_ids" = [
+#        "subnet-080452a292443a09f",
+#        "subnet-0e308cabf906cdeef",
+#      ]
+#    }
+#    "db" = {
+#      "subnet_ids" = [
+#        "subnet-0b2d9c660a947d3ef",
+#        "subnet-09b2aa79a5546cef2",
+#      ]
+#    }
+#    "web" = {
+#      "subnet_ids" = [
+#        "subnet-034d11058070bd810",
+#        "subnet-0bdb82984c8117ee2",
+#      ]
+#    }
 
-#output "one_subnet_id" {
+#2.output "one_subnet_id" {
 #  value = lookup(lookup(module.public_subnets, "public", null), "subnet_ids", null)[0]
 #}
 
+
+//
+#    output "public_subnet_ids" {
+#    value = module.public_subnets
+#    }
 #out = {
 #  "main" = { -----this is from root module
 #    "public_subnet_ids" = { ===from vpc module
