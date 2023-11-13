@@ -14,3 +14,5 @@ variable "nat_gw" {}
 variable "nat_gw_id" {
   default = null
 }
+
+// declaring null variables to avoid cyclic problem

@@ -16,6 +16,7 @@ module "public_subnets" {
   vpc_peering_connection_id  = aws_vpc_peering_connection.peer.id
   common_tags                = local.common_tags
   gateway_id                 = aws_internet_gateway.gw.id
+  # to provide nat_gw_id here it will create cyclic problem b/c nat gateway creates only when internet gw creates..to avoid this problem we will declare null variable
 }
 
 module "private_subnets" {
@@ -36,4 +37,5 @@ module "private_subnets" {
   vpc_peering_connection_id  = aws_vpc_peering_connection.peer.id
   common_tags                = local.common_tags
   nat_gw_id                  = aws_nat_gateway.ngw.id
+  # to provide gateway_id here it will create cyclic problem b/c nat gateway creates only when internet gw creates..to avoid this problem we will declare null variable
 }
